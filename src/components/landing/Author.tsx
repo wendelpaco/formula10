@@ -8,11 +8,11 @@ export function Author() {
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-12 items-center">
                     <div className="md:col-span-1 flex justify-center">
                         <Image 
-                            src="https://placehold.co/300x300.png"
+                            src="https://i.imgur.com/U7HI4Pk.jpeg"
                             alt="Foto do Autor"
                             width={300}
                             height={300}
-                            className="rounded-full shadow-2xl border-4 border-primary"
+                            className="rounded-full shadow-2xl border-4 border-primary object-cover"
                             data-ai-hint="professional photo"
                         />
                     </div>
