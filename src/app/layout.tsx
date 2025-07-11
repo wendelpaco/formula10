@@ -2,13 +2,13 @@ import type { Metadata } from "next";
 import "./globals.css";
 import { Toaster } from "@/components/ui/toaster";
 
-const appName = "NetStart eBook";
+const appName = "Método Renda Online";
 const appDescription = "Descubra o método passo a passo para ganhar dinheiro na internet mesmo sem experiência com nosso eBook exclusivo.";
 
 export const metadata: Metadata = {
   title: appName,
   description: appDescription,
-  keywords: ["ganhar dinheiro", "trabalhar online", "renda extra", "netstart", "ebook", "marketing digital"],
+  keywords: ["ganhar dinheiro", "trabalhar online", "renda extra", "método renda online", "ebook", "marketing digital"],
   openGraph: {
     title: appName,
     description: appDescription,
