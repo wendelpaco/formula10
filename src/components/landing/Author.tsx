@@ -21,7 +21,7 @@ export function Author() {
                             Sobre o Autor
                         </h2>
                         <p className="text-lg text-muted-foreground mb-6">
-                            <strong>João da Silva</strong> é um empreendedor digital com mais de 10 anos de experiência em marketing e negócios online. Após falhar em 5 negócios diferentes, ele desenvolveu um método à prova de falhas que já ajudou milhares de pessoas a alcançarem a independência financeira.
+                            <strong>Guilherme Salles</strong> é um empreendedor digital com mais de 10 anos de experiência em marketing e negócios online. Após falhar em 5 negócios diferentes, ele desenvolveu um método à prova de falhas que já ajudou milhares de pessoas a alcançarem a independência financeira.
                         </p>
                         <div className="flex flex-col gap-4">
                             <div className="flex items-center gap-3">
