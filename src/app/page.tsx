@@ -1,10 +1,12 @@
 import { Header } from "@/components/landing/Header";
 import { Hero } from "@/components/landing/Hero";
 import { Benefits } from "@/components/landing/Benefits";
+import { Urgency } from "@/components/landing/Urgency";
 import { Testimonials } from "@/components/landing/Testimonials";
-import { CourseContent } from "@/components/landing/CourseContent";
-import { Guarantee } from "@/components/landing/Guarantee";
-import { Purchase } from "@/components/landing/Purchase";
+import { Author } from "@/components/landing/Author";
+import { Bonuses } from "@/components/landing/Bonuses";
+import { Faq } from "@/components/landing/Faq";
+import { FinalCta } from "@/components/landing/FinalCta";
 import { Footer } from "@/components/landing/Footer";
 
 export default function Home() {
@@ -14,10 +16,12 @@ export default function Home() {
       <main className="flex-1">
         <Hero />
         <Benefits />
+        <Urgency />
         <Testimonials />
-        <CourseContent />
-        <Guarantee />
-        <Purchase />
+        <Author />
+        <Bonuses />
+        <Faq />
+        <FinalCta />
       </main>
       <Footer />
     </div>

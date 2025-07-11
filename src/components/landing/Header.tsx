@@ -6,7 +6,7 @@ import { BookCopy } from "lucide-react";
 export function Header() {
   const handleScrollToPurchase = () => {
     document
-      .getElementById("purchase-section")
+      .getElementById("final-cta")
       ?.scrollIntoView({ behavior: "smooth" });
   };
 
@@ -16,7 +16,9 @@ export function Header() {
         <BookCopy className="h-6 w-6 text-primary" />
         <h1 className="text-xl font-bold text-foreground">NetStart eBook</h1>
       </div>
-      <Button onClick={handleScrollToPurchase}>Quero aprender</Button>
+      <Button onClick={handleScrollToPurchase} variant="default" className="bg-accent hover:bg-accent/90">
+        QUERO MEU EBOOK AGORA
+      </Button>
     </header>
   );
 }
