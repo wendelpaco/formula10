@@ -37,7 +37,7 @@ export function Hero() {
       <div className="mt-12 flex justify-center">
         <div className="relative w-full max-w-xs md:max-w-sm">
           <Image
-            src="https://placehold.co/400x500.png"
+            src="https://i.imgur.com/K29eHA4.png"
             alt="eBook Mockup"
             width={400}
             height={500}
