@@ -1,7 +1,7 @@
 import {
   Globe,
-  Clock,
-  BadgeCheck,
+  Star,
+  Zap,
   EyeOff,
   CircleDollarSign,
 } from "lucide-react";
@@ -10,27 +10,27 @@ const benefits = [
   {
     icon: Globe,
     title: "Trabalhe de onde quiser",
-    description: "Liberdade para produzir de qualquer lugar do mundo.",
+    description: "Com apenas um celular ou notebook.",
   },
   {
-    icon: Clock,
-    title: "Gaste poucas horas por dia",
-    description: "Flexibilidade para se dedicar no seu próprio ritmo.",
+    icon: Star,
+    title: "Ideal para quem está começando",
+    description: "E não sabe por onde iniciar.",
   },
   {
-    icon: BadgeCheck,
-    title: "Método validado",
-    description: "Estratégias testadas com resultados reais e comprovados.",
+    icon: Zap,
+    title: "Método rápido e simples",
+    description: "Sem enrolação, direto ao ponto.",
   },
   {
     icon: EyeOff,
-    title: "Sem precisar aparecer",
-    description: "Ganhe dinheiro nos bastidores, sem expor sua imagem.",
+    title: "Não precisa aparecer",
+    description: "Ou vender para conhecidos.",
   },
   {
     icon: CircleDollarSign,
-    title: "Comece com zero investimento",
-    description: "Use ferramentas e técnicas que não custam nada para iniciar.",
+    title: "Comece sem investir",
+    description: "Use ferramentas e técnicas que não custam nada.",
   },
 ];
 

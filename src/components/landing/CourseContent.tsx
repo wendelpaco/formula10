@@ -1,21 +1,25 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { CheckCircle2 } from "lucide-react";
+import { BookMarked } from "lucide-react";
 
 const content = [
   {
-    title: "Escolha do Modelo Certo",
+    title: "Capítulo 1: Os 5 modelos de renda online mais eficazes em 2025",
     description: "Aprenda a identificar os nichos mais lucrativos e que se encaixam no seu perfil.",
   },
   {
-    title: "Atração de Clientes",
+    title: "Capítulo 2: Como escolher o caminho ideal para o seu perfil",
     description: "Descubra estratégias orgânicas para atrair seus primeiros clientes sem gastar com anúncios.",
   },
   {
-    title: "Ferramentas Grátis",
+    title: "Capítulo 3: Estratégias para atrair os primeiros clientes automaticamente",
     description: "Um arsenal de ferramentas gratuitas para criar, gerenciar e automatizar seu negócio online.",
   },
   {
-    title: "Estratégias para Escalar",
+    title: "Capítulo 4: Ferramentas gratuitas que facilitam seu início",
+    description: "Leve seu negócio para o próximo nível com técnicas de crescimento sustentável.",
+  },
+  {
+    title: "Capítulo 5: Como escalar e transformar sua renda extra em renda principal",
     description: "Leve seu negócio para o próximo nível com técnicas de crescimento sustentável.",
   },
 ];
@@ -36,12 +40,9 @@ export function CourseContent() {
           {content.map((item, index) => (
             <Card key={index} className="bg-card">
               <CardHeader className="flex flex-row items-center gap-4">
-                 <CheckCircle2 className="h-8 w-8 text-primary" />
+                 <BookMarked className="h-8 w-8 text-primary" />
                  <CardTitle className="text-xl">{item.title}</CardTitle>
               </CardHeader>
-              <CardContent>
-                <p className="text-muted-foreground">{item.description}</p>
-              </CardContent>
             </Card>
           ))}
         </div>

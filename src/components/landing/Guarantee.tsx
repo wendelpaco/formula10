@@ -8,11 +8,10 @@ export function Guarantee() {
           <ShieldCheck className="h-24 w-24 flex-shrink-0 text-primary md:h-32 md:w-32" />
           <div>
             <h2 className="font-headline text-2xl font-bold text-foreground sm:text-3xl">
-              Garantia de 7 dias ou seu dinheiro de volta
+              Garantia incondicional de 7 dias!
             </h2>
             <p className="mt-4 text-lg text-muted-foreground">
-              Você tem 7 dias para testar o método. Se não ficar satisfeito,
-              devolvemos 100% do seu investimento. Risco zero para você.
+              Se você não gostar do conteúdo, basta enviar um e-mail e devolvemos seu dinheiro — simples assim.
             </p>
           </div>
         </div>

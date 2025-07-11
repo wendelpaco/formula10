@@ -30,7 +30,7 @@ export function Purchase() {
               size="lg"
               className="w-full text-lg font-bold"
             >
-              <a href="#">Comprar Agora e Ter Acesso Imediato</a>
+              <a href="#">Quero Garantir Meu eBook Agora</a>
             </Button>
             <div className="mt-4 flex items-center justify-center gap-2 text-sm text-amber-600">
                 <Zap className="h-4 w-4" />

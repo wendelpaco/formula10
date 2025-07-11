@@ -4,18 +4,18 @@ import { Star } from "lucide-react";
 
 const testimonials = [
   {
-    name: "João S.",
-    avatar: "JS",
-    text: "O método é muito prático e direto ao ponto. Consegui meus primeiros resultados em menos de um mês!",
+    name: "Carlos M., Uberlândia - MG",
+    avatar: "CM",
+    text: "Eu não acreditava que fosse possível até tentar. Hoje ganho mais do que no meu antigo emprego fixo.",
   },
   {
-    name: "Maria P.",
-    avatar: "MP",
-    text: "Nunca imaginei que fosse possível começar sem investir nada. Este eBook mudou minha perspectiva.",
+    name: "Juliana R., Salvador - BA",
+    avatar: "JR",
+    text: "Comecei com o celular velho da minha mãe. Hoje comprei meu próprio notebook com os ganhos!",
   },
   {
-    name: "Carlos A.",
-    avatar: "CA",
+    name: "Ana L.",
+    avatar: "AL",
     text: "Excelente conteúdo! As dicas sobre ferramentas gratuitas foram um divisor de águas para mim.",
   },
 ];

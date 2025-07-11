@@ -14,12 +14,10 @@ export function Hero() {
     <section className="bg-card pt-32 pb-16 text-center">
       <div className="container mx-auto max-w-4xl px-4">
         <h2 className="font-headline text-4xl font-extrabold tracking-tight text-foreground md:text-5xl lg:text-6xl">
-          Descubra o Método Passo a Passo Para Ganhar Dinheiro na Internet Mesmo
-          Sem Experiência!
+          Descubra Como Ganhar Dinheiro na Internet do Zero, Mesmo Sem Experiência!
         </h2>
         <p className="mx-auto mt-6 max-w-2xl text-lg text-muted-foreground md:text-xl">
-          Milhares já estão aplicando este método e tendo resultados reais —
-          aproveite enquanto está disponível!
+          Método simples, direto ao ponto, testado e aprovado por quem realmente começou do absoluto zero!
         </p>
         <div className="mt-8 flex justify-center">
           <Button
@@ -27,7 +25,7 @@ export function Hero() {
             className="text-lg font-bold"
             onClick={handleScrollToPurchase}
           >
-            Quero Começar Agora
+            Quero Começar Agora 🔥
           </Button>
         </div>
       </div>
