@@ -55,7 +55,7 @@ export function FinalCta() {
            <div className="bg-muted p-4">
             <p className="text-center text-sm text-muted-foreground">Formas de Pagamento Aceitas:</p>
             <div className="flex justify-center items-center gap-4 mt-2">
-                <Image src="https://i.imgur.com/PHmYwni.png" data-ai-hint="payment methods secure" alt="Formas de Pagamento Aceitas" width={300} height={31} />
+                <Image src="https://i.imgur.com/2A4j4sT.png" data-ai-hint="payment methods secure" alt="Formas de Pagamento Aceitas" width={300} height={31} />
             </div>
           </div>
         </Card>
