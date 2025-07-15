@@ -1,5 +1,11 @@
 
+'use client';
+
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
+import { useForm, SubmitHandler } from 'react-hook-form';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { z } from 'zod';
 import { Button } from '@/components/ui/button';
 import {
   Card,
@@ -10,9 +16,67 @@ import {
 } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import { Rocket } from 'lucide-react';
+import { Rocket, Loader2 } from 'lucide-react';
+import { useToast } from "@/hooks/use-toast"
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from "@/components/ui/form"
+import { auth } from '@/lib/firebase';
+import { createUserWithEmailAndPassword, updateProfile } from 'firebase/auth';
+
+const formSchema = z.object({
+  fullName: z.string().min(3, { message: "O nome completo é obrigatório." }),
+  email: z.string().email({ message: "Por favor, insira um email válido." }),
+  password: z.string().min(6, { message: "A senha deve ter pelo menos 6 caracteres." }),
+});
+
+type FormData = z.infer<typeof formSchema>;
 
 export default function RegisterPage() {
+  const router = useRouter();
+  const { toast } = useToast();
+  const form = useForm<FormData>({
+    resolver: zodResolver(formSchema),
+    defaultValues: {
+      fullName: "",
+      email: "",
+      password: ""
+    }
+  });
+
+  const { isSubmitting } = form.formState;
+
+  const onSubmit: SubmitHandler<FormData> = async (data) => {
+    try {
+      const userCredential = await createUserWithEmailAndPassword(auth, data.email, data.password);
+      const user = userCredential.user;
+
+      await updateProfile(user, {
+        displayName: data.fullName
+      });
+
+      toast({
+        title: "Sucesso!",
+        description: "Sua conta foi criada. Você será redirecionado em breve.",
+        variant: "default",
+      })
+
+      router.push('/dashboard');
+    } catch (error: any) {
+      console.error("Erro no registro:", error);
+       toast({
+        title: "Erro ao criar conta",
+        description: "Ocorreu um erro ao criar sua conta. Verifique os dados e tente novamente. O email pode já estar em uso.",
+        variant: "destructive",
+      })
+    }
+  };
+
   return (
     <div className="flex min-h-screen items-center justify-center bg-muted/40">
       <Card className="mx-auto w-full max-w-sm">
@@ -24,28 +88,59 @@ export default function RegisterPage() {
             </CardDescription>
         </CardHeader>
         <CardContent>
-          <div className="grid gap-4">
-            <div className="grid gap-2">
-              <Label htmlFor="full-name">Nome completo</Label>
-              <Input id="full-name" placeholder="Seu Nome Completo" required />
-            </div>
-            <div className="grid gap-2">
-              <Label htmlFor="email">Email</Label>
-              <Input
-                id="email"
-                type="email"
-                placeholder="seu@email.com"
-                required
+          <Form {...form}>
+            <form onSubmit={form.handleSubmit(onSubmit)} className="grid gap-4">
+              <FormField
+                control={form.control}
+                name="fullName"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Nome completo</FormLabel>
+                    <FormControl>
+                      <Input placeholder="Seu Nome Completo" {...field} />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
               />
-            </div>
-            <div className="grid gap-2">
-              <Label htmlFor="password">Senha</Label>
-              <Input id="password" type="password" required />
-            </div>
-            <Button type="submit" className="w-full bg-accent hover:bg-accent/90">
-              CRIAR CONTA
-            </Button>
-          </div>
+              <FormField
+                control={form.control}
+                name="email"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Email</FormLabel>
+                    <FormControl>
+                      <Input type="email" placeholder="seu@email.com" {...field} />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
+                name="password"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Senha</FormLabel>
+                    <FormControl>
+                      <Input type="password" {...field} />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <Button type="submit" className="w-full bg-accent hover:bg-accent/90" disabled={isSubmitting}>
+                {isSubmitting ? (
+                  <>
+                    <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                    Criando conta...
+                  </>
+                ) : (
+                  'CRIAR CONTA'
+                )}
+              </Button>
+            </form>
+          </Form>
           <div className="mt-4 text-center text-sm">
             Já tem uma conta?{' '}
             <Link href="/auth/login" className="underline">
