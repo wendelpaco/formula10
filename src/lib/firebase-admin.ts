@@ -1,23 +1,49 @@
 
 import * as admin from 'firebase-admin';
 
-const serviceAccount = process.env.FIREBASE_SERVICE_ACCOUNT_KEY
-  ? JSON.parse(process.env.FIREBASE_SERVICE_ACCOUNT_KEY)
-  : undefined;
+const serviceAccountKey = process.env.FIREBASE_SERVICE_ACCOUNT_KEY;
+
+let initialized = false;
 
 if (!admin.apps.length) {
-  if (serviceAccount) {
-    admin.initializeApp({
-      credential: admin.credential.cert(serviceAccount),
-    });
+  if (serviceAccountKey) {
+    try {
+      const serviceAccount = JSON.parse(serviceAccountKey);
+      admin.initializeApp({
+        credential: admin.credential.cert(serviceAccount),
+      });
+      initialized = true;
+    } catch (error) {
+      console.error("Error parsing Firebase service account key:", error);
+    }
   } else {
-    console.warn("Firebase Admin SDK not initialized. Missing FIREBASE_SERVICE_ACCOUNT_KEY.");
-    // Initialize without credentials for local development if needed,
-    // though some features might not work.
-    admin.initializeApp();
+    console.warn("Firebase Admin SDK not initialized. Missing or invalid FIREBASE_SERVICE_ACCOUNT_KEY environment variable. Some features will not work.");
   }
+} else {
+  initialized = true; // Already initialized
 }
 
-export const auth = admin.auth();
-export const db = admin.firestore();
-export const storage = admin.storage();
+function getAuth() {
+  if (!initialized) {
+    throw new Error("Firebase Admin SDK not initialized. Cannot access auth services.");
+  }
+  return admin.auth();
+}
+
+function getDb() {
+    if (!initialized) {
+        throw new Error("Firebase Admin SDK not initialized. Cannot access firestore services.");
+    }
+    return admin.firestore();
+}
+
+function getStorage() {
+    if (!initialized) {
+        throw new Error("Firebase Admin SDK not initialized. Cannot access storage services.");
+    }
+    return admin.storage();
+}
+
+export const auth = initialized ? getAuth() : null;
+export const db = initialized ? getDb() : null;
+export const storage = initialized ? getStorage() : null;

@@ -13,6 +13,10 @@ const formSchema = z.object({
 type FormData = z.infer<typeof formSchema>;
 
 export async function createUser(data: FormData) {
+  if (!auth) {
+      return { success: false, error: "O serviço de autenticação não está disponível. Verifique a configuração do servidor." };
+  }
+
   try {
     const validatedData = formSchema.parse(data);
 
