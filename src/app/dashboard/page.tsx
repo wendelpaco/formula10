@@ -3,6 +3,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle, CardFooter }
 import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
 import { Book, Gift, Video } from "lucide-react";
+import Link from "next/link";
 
 export default function DashboardPage() {
     // Mock data, will be replaced with real user data
@@ -25,9 +26,11 @@ export default function DashboardPage() {
                         <div className="flex-1">
                             <h3 className="text-sm font-medium">Seu Progresso</h3>
                             <Progress value={progress} className="mt-2 h-2" />
-                            <p className="text-xs text-muted-foreground mt-1">{completedModules} de {totalModules} módulos concluídos</p>
+                            <p className="text-xs text-muted-foreground mt-1">{completedModules} de {totalModules} concluídos</p>
                         </div>
-                        <Button size="sm" className="bg-accent hover:bg-accent/90">Continuar de onde parou</Button>
+                        <Button asChild size="sm" className="bg-accent hover:bg-accent/90">
+                            <Link href="/dashboard/library">Continuar de onde parou</Link>
+                        </Button>
                      </div>
                 </CardContent>
             </Card>
@@ -42,7 +45,9 @@ export default function DashboardPage() {
                         <CardDescription>Método completo passo a passo para sua jornada de sucesso online.</CardDescription>
                     </CardHeader>
                     <CardFooter className="mt-auto">
-                        <Button className="w-full">BAIXAR AGORA</Button>
+                        <Button asChild className="w-full">
+                            <Link href="/dashboard/library">BAIXAR AGORA</Link>
+                        </Button>
                     </CardFooter>
                 </Card>
 
@@ -55,7 +60,9 @@ export default function DashboardPage() {
                         <CardDescription>Templates e ferramentas extras para acelerar seus resultados.</CardDescription>
                     </CardHeader>
                      <CardFooter className="mt-auto">
-                        <Button className="w-full">ACESSAR</Button>
+                        <Button asChild className="w-full">
+                            <Link href="/dashboard/bonuses">ACESSAR</Link>
+                        </Button>
                     </CardFooter>
                 </Card>
 
@@ -68,7 +75,9 @@ export default function DashboardPage() {
                         <CardDescription>Conteúdo em vídeo para complementar e aprofundar seu aprendizado.</CardDescription>
                     </CardHeader>
                      <CardFooter className="mt-auto">
-                        <Button className="w-full">ASSISTIR</Button>
+                        <Button asChild className="w-full">
+                           <Link href="/dashboard/library">ASSISTIR</Link>
+                        </Button>
                     </CardFooter>
                 </Card>
             </div>

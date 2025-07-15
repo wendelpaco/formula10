@@ -12,7 +12,7 @@ const libraryContent = [
         type: "Ebook",
         fileType: "PDF",
         fileSize: "5.8 MB",
-        imageUrl: "https://i.imgur.com/O9ZGEBt.png",
+        imageUrl: "https://i.imgur.com/K29eHA4.png",
         category: "Ebooks",
     },
     {
