@@ -29,13 +29,22 @@ export async function createUser(data: FormData) {
 
     return { success: true, userId: userRecord.uid };
   } catch (error: any) {
-    let errorMessage = "Ocorreu um erro desconhecido.";
+    let errorMessage = "Ocorreu um erro desconhecido ao criar a conta.";
+    
+    // Handle Zod validation errors
+    if (error instanceof z.ZodError) {
+      errorMessage = 'Dados inválidos. Por favor, verifique os campos.';
+       console.error("Zod validation error:", error.flatten().fieldErrors);
+       return { success: false, error: errorMessage };
+    }
+    
+    // Handle Firebase Admin SDK errors
     if (error.code === 'auth/email-already-exists') {
       errorMessage = 'Este endereço de e-mail já está em uso por outra conta.';
-    } else if (error instanceof z.ZodError) {
-      errorMessage = 'Dados inválidos. Por favor, verifique os campos.'
+    } else if (error.code === 'auth/invalid-password') {
+        errorMessage = 'A senha é inválida. Deve ter pelo menos 6 caracteres.';
     }
-    // You can add more specific Firebase error codes here
+
     console.error("Firebase Admin SDK error:", error);
     return { success: false, error: errorMessage };
   }
