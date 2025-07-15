@@ -15,7 +15,6 @@ import {
   CardTitle,
 } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
 import { Rocket, Loader2 } from 'lucide-react';
 import { useToast } from "@/hooks/use-toast"
 import {
@@ -26,8 +25,8 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form"
-import { auth } from '@/lib/firebase';
-import { createUserWithEmailAndPassword, updateProfile } from 'firebase/auth';
+import { createUser } from './actions';
+
 
 const formSchema = z.object({
   fullName: z.string().min(3, { message: "O nome completo é obrigatório." }),
@@ -52,26 +51,20 @@ export default function RegisterPage() {
   const { isSubmitting } = form.formState;
 
   const onSubmit: SubmitHandler<FormData> = async (data) => {
-    try {
-      const userCredential = await createUserWithEmailAndPassword(auth, data.email, data.password);
-      const user = userCredential.user;
+    const result = await createUser(data);
 
-      await updateProfile(user, {
-        displayName: data.fullName
-      });
-
+    if (result.success) {
       toast({
         title: "Sucesso!",
         description: "Sua conta foi criada. Você será redirecionado em breve.",
         variant: "default",
       })
-
       router.push('/dashboard');
-    } catch (error: any) {
-      console.error("Erro no registro:", error);
+    } else {
+      console.error("Erro no registro:", result.error);
        toast({
         title: "Erro ao criar conta",
-        description: "Ocorreu um erro ao criar sua conta. Verifique os dados e tente novamente. O email pode já estar em uso.",
+        description: result.error || "Ocorreu um erro ao criar sua conta. Verifique os dados e tente novamente.",
         variant: "destructive",
       })
     }
