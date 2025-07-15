@@ -27,11 +27,11 @@ import {
 } from '@/components/ui/sheet';
 
 const navItems = [
-    { href: '/dashboard', icon: Home, label: 'Dashboard' },
-    { href: '/dashboard/library', icon: Book, label: 'Biblioteca' },
-    { href: '/dashboard/bonuses', icon: Gift, label: 'Bônus' },
-    { href: '/dashboard/profile', icon: User, label: 'Meu Perfil' },
-    { href: '/dashboard/support', icon: LifeBuoy, label: 'Suporte' },
+    { href: '/dashboard', label: 'Dashboard', icon: Home },
+    { href: '/dashboard/library', label: 'Biblioteca', icon: Book },
+    { href: '/dashboard/bonuses', label: 'Bônus', icon: Gift },
+    { href: '/dashboard/profile', label: 'Meu Perfil', icon: User },
+    { href: '/dashboard/support', label: 'Suporte', icon: LifeBuoy },
 ];
 
 export default function DashboardLayout({
@@ -42,7 +42,9 @@ export default function DashboardLayout({
   const pathname = usePathname();
 
   const getPageTitle = () => {
-    const currentItem = navItems.find(item => pathname === item.href);
+    // Find the item that matches the current path exactly.
+    // For nested routes, find the item whose href is a prefix of the current path.
+    const currentItem = navItems.find(item => pathname === item.href || (pathname.startsWith(item.href) && item.href !== '/dashboard'));
     return currentItem ? currentItem.label : 'Dashboard';
   }
 
@@ -64,7 +66,7 @@ export default function DashboardLayout({
                   <Link
                     href={item.href}
                     className={`flex h-9 w-9 items-center justify-center rounded-lg transition-colors md:h-8 md:w-8 ${
-                      pathname.startsWith(item.href) && (item.href !== '/dashboard' || pathname === '/dashboard')
+                      pathname === item.href || (pathname.startsWith(item.href) && item.href !== '/dashboard')
                         ? 'bg-accent text-accent-foreground'
                         : 'text-muted-foreground hover:text-foreground'
                     }`}
@@ -101,7 +103,7 @@ export default function DashboardLayout({
                         key={item.href}
                         href={item.href}
                         className={`flex items-center gap-4 px-2.5 ${
-                            pathname.startsWith(item.href) && (item.href !== '/dashboard' || pathname === '/dashboard')
+                            pathname === item.href || (pathname.startsWith(item.href) && item.href !== '/dashboard')
                             ? 'text-foreground'
                             : 'text-muted-foreground hover:text-foreground'
                         }`}
