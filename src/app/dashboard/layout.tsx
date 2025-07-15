@@ -41,6 +41,11 @@ export default function DashboardLayout({
 }) {
   const pathname = usePathname();
 
+  const getPageTitle = () => {
+    const currentItem = navItems.find(item => pathname === item.href);
+    return currentItem ? currentItem.label : 'Dashboard';
+  }
+
   return (
     <TooltipProvider>
       <div className="flex min-h-screen w-full flex-col bg-muted/40">
@@ -59,7 +64,7 @@ export default function DashboardLayout({
                   <Link
                     href={item.href}
                     className={`flex h-9 w-9 items-center justify-center rounded-lg transition-colors md:h-8 md:w-8 ${
-                      pathname === item.href
+                      pathname.startsWith(item.href) && (item.href !== '/dashboard' || pathname === '/dashboard')
                         ? 'bg-accent text-accent-foreground'
                         : 'text-muted-foreground hover:text-foreground'
                     }`}
@@ -96,7 +101,7 @@ export default function DashboardLayout({
                         key={item.href}
                         href={item.href}
                         className={`flex items-center gap-4 px-2.5 ${
-                            pathname === item.href
+                            pathname.startsWith(item.href) && (item.href !== '/dashboard' || pathname === '/dashboard')
                             ? 'text-foreground'
                             : 'text-muted-foreground hover:text-foreground'
                         }`}
@@ -108,7 +113,7 @@ export default function DashboardLayout({
                 </nav>
               </SheetContent>
             </Sheet>
-             <h1 className="text-xl font-semibold">Dashboard</h1>
+             <h1 className="text-xl font-semibold">{getPageTitle()}</h1>
           </header>
           <main className="flex-1 p-4 sm:px-6 sm:py-0">{children}</main>
         </div>
