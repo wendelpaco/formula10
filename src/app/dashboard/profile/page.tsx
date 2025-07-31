@@ -9,7 +9,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { User, KeyRound, Bell, Loader2 } from "lucide-react";
+import { User, KeyRound, Bell } from "lucide-react";
 import { Skeleton } from '@/components/ui/skeleton';
 
 
@@ -19,12 +19,7 @@ export default function ProfilePage() {
 
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged((currentUser) => {
-      if (currentUser) {
-        setUser(currentUser);
-      } else {
-        // Handle case where user is not logged in, maybe redirect
-        setUser(null);
-      }
+      setUser(currentUser);
       setLoading(false);
     });
 
@@ -149,4 +144,3 @@ export default function ProfilePage() {
      </div>
   );
 }
-
