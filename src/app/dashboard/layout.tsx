@@ -2,7 +2,7 @@
 'use client';
 
 import Link from 'next/link';
-import { usePathname } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 import {
   Home,
   Book,
@@ -10,8 +10,11 @@ import {
   LifeBuoy,
   User,
   PanelLeft,
-  Rocket
+  Rocket,
+  Loader2
 } from 'lucide-react';
+import { auth } from '@/lib/firebase';
+import { useAuthState } from 'react-firebase-hooks/auth';
 
 import { Button } from '@/components/ui/button';
 import {
@@ -25,6 +28,7 @@ import {
   SheetContent,
   SheetTrigger,
 } from '@/components/ui/sheet';
+import { useEffect } from 'react';
 
 const navItems = [
     { href: '/dashboard', label: 'Dashboard', icon: Home },
@@ -40,10 +44,40 @@ export default function DashboardLayout({
   children: React.ReactNode;
 }) {
   const pathname = usePathname();
+  const router = useRouter();
+  const [user, loading, error] = useAuthState(auth);
+
+
+  useEffect(() => {
+    // If not loading and no user is authenticated, redirect to login
+    if (!loading && !user) {
+      router.push('/auth/login');
+    }
+  }, [user, loading, router]);
+
+
+  if (loading) {
+    return (
+        <div className="flex min-h-screen w-full items-center justify-center bg-muted/40">
+            <Loader2 className="h-8 w-8 animate-spin text-primary" />
+        </div>
+    );
+  }
+
+  if (error) {
+     return (
+        <div className="flex min-h-screen w-full items-center justify-center bg-muted/40">
+            <p className="text-destructive">Ocorreu um erro ao carregar. Tente novamente.</p>
+        </div>
+    );
+  }
+
+  // If there is no user, return null to avoid flashing the layout
+  if (!user) {
+    return null;
+  }
 
   const getPageTitle = () => {
-    // Find the item that matches the current path exactly.
-    // For nested routes, find the item whose href is a prefix of the current path.
     const currentItem = navItems.find(item => pathname === item.href || (pathname.startsWith(item.href) && item.href !== '/dashboard'));
     return currentItem ? currentItem.label : 'Dashboard';
   }
