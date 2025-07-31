@@ -53,9 +53,12 @@ export default function LibraryPage() {
 
   return (
     <div className="grid auto-rows-max items-start gap-4 md:gap-8">
-        <div className="flex items-center justify-between">
-            <div>
-                <h1 className="text-2xl font-bold tracking-tight">Sua Biblioteca</h1>
+        <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+             <div className="text-center md:text-left">
+                <h1 className="text-2xl font-bold tracking-tight flex items-center gap-2 justify-center md:justify-start">
+                    <Book className="h-6 w-6 text-primary" />
+                    Sua Biblioteca
+                </h1>
                 <p className="text-muted-foreground">Todo o seu conteúdo disponível em um só lugar.</p>
             </div>
              <div className="relative ml-auto flex-1 md:grow-0">
@@ -70,7 +73,7 @@ export default function LibraryPage() {
             </div>
         </div>
 
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-2 flex-wrap">
             {categories.map(category => (
                 <Button 
                     key={category} 
@@ -84,7 +87,7 @@ export default function LibraryPage() {
 
         <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
             {filteredContent.map((item, index) => (
-                 <Card key={index} className="overflow-hidden group">
+                 <Card key={index} className="overflow-hidden group flex flex-col">
                     <CardHeader className="p-0">
                        <div className="relative aspect-video">
                          <Image 
@@ -102,7 +105,7 @@ export default function LibraryPage() {
                          </div>
                        </div>
                     </CardHeader>
-                    <CardContent className="p-4">
+                    <CardContent className="p-4 flex-1">
                         <h3 className="font-bold text-lg">{item.title}</h3>
                         <p className="text-muted-foreground text-sm mt-1">{item.description}</p>
                     </CardContent>
@@ -117,9 +120,11 @@ export default function LibraryPage() {
             ))}
         </div>
         {filteredContent.length === 0 && (
-            <div className="text-center py-16 text-muted-foreground">
-                <p>Nenhum conteúdo encontrado para sua busca.</p>
-            </div>
+            <Card className="md:col-span-2 lg:col-span-3">
+                <CardContent className="text-center py-16 text-muted-foreground">
+                    <p>Nenhum conteúdo encontrado para sua busca.</p>
+                </CardContent>
+            </Card>
         )}
     </div>
   );

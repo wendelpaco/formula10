@@ -31,8 +31,11 @@ export default function ProfilePage() {
 
   return (
      <div className="grid auto-rows-max items-start gap-4 md:gap-8">
-        <div>
-            <h1 className="text-2xl font-bold tracking-tight">Meu Perfil</h1>
+        <div className="text-center md:text-left">
+            <h1 className="text-2xl font-bold tracking-tight flex items-center gap-2 justify-center md:justify-start">
+                <User className="h-6 w-6 text-primary" />
+                Meu Perfil
+            </h1>
             <p className="text-muted-foreground">Gerencie suas informações pessoais e configurações.</p>
         </div>
 
@@ -70,7 +73,8 @@ export default function ProfilePage() {
              <div>
                 <Card>
                     <CardHeader>
-                        <CardTitle>Configurações</CardTitle>
+                        <CardTitle>Segurança e Ações</CardTitle>
+                        <CardDescription>Gerencie sua senha e conta.</CardDescription>
                     </CardHeader>
                     <CardContent className="space-y-4">
                         <Button variant="outline" className="w-full justify-start">

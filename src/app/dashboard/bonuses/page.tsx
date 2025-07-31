@@ -60,7 +60,7 @@ export default function BonusesPage() {
                     </CardContent>
                     <CardFooter className="mt-auto">
                         <Button className="w-full">
-                           <CheckCircle className="mr-2" /> RESGATAR AGORA
+                           <CheckCircle className="mr-2 h-4 w-4" /> RESGATAR AGORA
                         </Button>
                     </CardFooter>
                 </Card>
