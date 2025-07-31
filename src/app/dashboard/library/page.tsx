@@ -1,4 +1,7 @@
 
+'use client';
+
+import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
@@ -35,8 +38,19 @@ const libraryContent = [
     }
 ];
 
+const categories = ["Todos", "Ebooks", "Vídeos", "Bônus"];
 
 export default function LibraryPage() {
+    const [searchTerm, setSearchTerm] = useState("");
+    const [selectedCategory, setSelectedCategory] = useState("Todos");
+
+    const filteredContent = libraryContent.filter(item => {
+        const matchesCategory = selectedCategory === "Todos" || item.category === selectedCategory;
+        const matchesSearch = item.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                              item.description.toLowerCase().includes(searchTerm.toLowerCase());
+        return matchesCategory && matchesSearch;
+    });
+
   return (
     <div className="grid auto-rows-max items-start gap-4 md:gap-8">
         <div className="flex items-center justify-between">
@@ -50,19 +64,26 @@ export default function LibraryPage() {
                   type="search"
                   placeholder="Buscar conteúdo..."
                   className="w-full rounded-lg bg-background pl-8 md:w-[200px] lg:w-[320px]"
+                  value={searchTerm}
+                  onChange={(e) => setSearchTerm(e.target.value)}
                 />
             </div>
         </div>
 
         <div className="flex items-center gap-2">
-            <Button variant="default">Todos</Button>
-            <Button variant="outline">Ebooks</Button>
-            <Button variant="outline">Vídeos</Button>
-            <Button variant="outline">Bônus</Button>
+            {categories.map(category => (
+                <Button 
+                    key={category} 
+                    variant={selectedCategory === category ? 'default' : 'outline'}
+                    onClick={() => setSelectedCategory(category)}
+                >
+                    {category}
+                </Button>
+            ))}
         </div>
 
         <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-            {libraryContent.map((item, index) => (
+            {filteredContent.map((item, index) => (
                  <Card key={index} className="overflow-hidden group">
                     <CardHeader className="p-0">
                        <div className="relative aspect-video">
@@ -95,6 +116,11 @@ export default function LibraryPage() {
                  </Card>
             ))}
         </div>
+        {filteredContent.length === 0 && (
+            <div className="text-center py-16 text-muted-foreground">
+                <p>Nenhum conteúdo encontrado para sua busca.</p>
+            </div>
+        )}
     </div>
   );
 }
