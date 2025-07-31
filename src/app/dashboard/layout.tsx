@@ -55,13 +55,12 @@ export default function DashboardLayout({
       <div className="flex min-h-screen w-full bg-muted/40">
         <Sidebar collapsible="icon">
             <SidebarHeader>
-                 <Link
-                    href="/dashboard"
+                 <div
                     className="group flex h-9 w-9 shrink-0 items-center justify-center gap-2 rounded-full bg-primary text-lg font-semibold text-primary-foreground md:h-8 md:w-8 md:text-base"
                     >
                     <Rocket className="h-4 w-4 transition-all group-hover:scale-110" />
                     <span className="sr-only">Método Renda Online</span>
-                </Link>
+                </div>
             </SidebarHeader>
             <SidebarContent>
                 <SidebarMenu>
@@ -84,7 +83,7 @@ export default function DashboardLayout({
                 {/* Can add footer items here if needed */}
             </SidebarFooter>
         </Sidebar>
-        <div className="flex flex-col sm:gap-4 sm:py-4 sm:pl-14">
+        <div className="flex flex-1 flex-col sm:gap-4 sm:py-4 sm:pl-14">
           <header className="sticky top-0 z-30 flex h-14 items-center gap-4 border-b bg-background px-4 sm:static sm:h-auto sm:border-0 sm:bg-transparent sm:px-6">
             <Sheet>
               <SheetTrigger asChild>
